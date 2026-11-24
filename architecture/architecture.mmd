@@ -1,0 +1,35 @@
+flowchart TB
+    INTERNET["Internet"]
+    LAN["Home LAN"]
+    SERVER["Ubuntu Server<br/>192.168.1.14"]
+
+    INTERNET --> LAN
+    LAN --> SERVER
+
+    subgraph Core["Docker: docker_default (Bridge)"]
+        HOMEPAGE["Homepage"]
+        PORTAINER["Portainer"]
+        JELLYFIN["Jellyfin"]
+    end
+
+    subgraph Monitor["Docker: monitor_default (Bridge)"]
+        NODE["Node Exporter"]
+        PROM["Prometheus"]
+        GRAFANA["Grafana"]
+        KUMA["Uptime Kuma"]
+
+        NODE -->|"Metrics"| PROM
+        PROM -->|"Queries"| GRAFANA
+    end
+
+    subgraph Network["Network Services"]
+        PIHOLE["Pi-hole<br/>192.168.1.20<br/>Macvlan"]
+        TAILSCALE["Tailscale<br/>Host networking"]
+    end
+
+    SERVER --> Core
+    SERVER --> Monitor
+    SERVER --> Network
+
+    LAN -->|"DNS queries"| PIHOLE
+    INTERNET -.->|"Encrypted remote access via tailnet"| TAILSCALE

@@ -1,0 +1,40 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.token
+
+# Logs
+*.log
+
+# Databases and application state
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups
+*.tar
+*.tar.gz
+*.zip
+*.bak
+
+# Tailscale private state
+tailscale/lib/
+tailscale/tun/
+
+# Prometheus data
+prometheus/data/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor files
+.vscode/
+.idea/
+*~
+*.crt
+*.p12
+*.pfx
