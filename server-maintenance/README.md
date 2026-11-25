@@ -35,7 +35,7 @@ The Docker health script is scheduled through cron.
 Current schedule:
 
 - Every day at 14:00 (2 PM).
-- Executes `/home/sidak/server-maintenance/docker-health.sh`.
+- Executes `~/server-maintenance/docker-health.sh`.
 
 ## 4. System Log Management
 

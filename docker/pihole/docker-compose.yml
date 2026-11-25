@@ -1,0 +1,32 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    hostname: pihole
+    networks:
+      pihole_network:
+        ipv4_address: ${PIHOLE_IP}
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+    environment:
+      TZ: ${TZ}
+      FTLCONF_webserver_api_password: ${PIHOLE_WEBPASSWORD:?Set PIHOLE_WEBPASSWORD}
+    volumes:
+      - ${PIHOLE_CONFIG_PATH}:/etc/pihole
+      - ${PIHOLE_DNSMASQ_PATH}:/etc/dnsmasq.d
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+networks:
+  pihole_network:
+    driver: macvlan
+    driver_opts:
+      parent: ${NETWORK_INTERFACE}
+    ipam:
+      config:
+        - subnet: ${LAN_SUBNET}
+          gateway: ${LAN_GATEWAY}

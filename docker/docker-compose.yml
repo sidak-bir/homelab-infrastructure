@@ -1,0 +1,6 @@
+include:
+  - portainer/docker-compose.yml
+  - homepage/docker-compose.yml
+  - jellyfin/docker-compose.yml
+  - tailscale/docker-compose.yml
+  - pihole/docker-compose.yml

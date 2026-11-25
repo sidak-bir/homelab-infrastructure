@@ -1,0 +1,5 @@
+include:
+  - kuma/docker-compose.yml
+  - prometheus/docker-compose.yml
+  - node-exporter/docker-compose.yml
+  - grafana/docker-compose.yml
